@@ -3,9 +3,10 @@ import Image from 'next/image'
 import {Button, Heading, Rating, Tag} from "../components";
 import {TextBlock} from "../components/TextBlock/TextBlock";
 import {useState, useEffect} from "react";
+import {withLayout} from "../layout/Layout";
 
 
-export default function Home():JSX.Element {
+ function Home():JSX.Element {
     const [rating, setRating] = useState<number>(1);
 
   return (
@@ -38,3 +39,4 @@ export default function Home():JSX.Element {
       </>
   );
 }
+export default withLayout (Home);
