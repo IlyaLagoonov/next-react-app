@@ -1,25 +1,23 @@
 import {LayoutProps} from "./Layout.props";
 import styles from './Layout.module.css';
 import cn from 'classnames';
-import {Header} from "./Header/Header";
 import {SideBar} from "./SideBar/SideBar";
 import {Footer} from "./Footer/Footer";
-import {FunctionComponent} from "react";
+import React,  {FunctionComponent} from "react";
+import {Header} from "./Header/Header";
 
  const Layout = ({children}: LayoutProps): JSX.Element => {
     return (
-        <>
-            <Header/>
-            <div>
-                <SideBar/>
-                <div>
+        <div className={styles.wrapper}>
+            <Header className={styles.header} />
+                <SideBar className={styles.sidebar}/>
+                <div className={styles.body}>
                     {children}
                 </div>
-            </div>
-            <Footer/>
-        </>
-    )
-}
+            <Footer className={styles.footer}/>
+        </div>
+    );
+};
 
 export const withLayout = <T extends Record<string, unknown>>(Component:FunctionComponent<T>) => {
     return function withLayoutComponent (props:T):JSX.Element {
@@ -27,6 +25,6 @@ export const withLayout = <T extends Record<string, unknown>>(Component:Function
             <Layout>
                 <Component {...props} />
             </Layout>
-        )
-    }
-}
+        );
+    };
+};

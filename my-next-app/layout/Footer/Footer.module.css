@@ -1,20 +1,20 @@
-.h1 {
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 35px;
-    margin: 0;
+.footer {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap:10px 40px;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 20px;
+    background: var(--primary);
+    padding: 25px 30px;
 }
 
-.h2 {
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 30px;
-    margin: 0;
+.footer a:hover {
+    color: var(--grey-light);
 }
 
-.h3 {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 27px;
-    margin: 0;
+@media (max-width: 765px) {
+    .footer {
+        grid-template-columns: 1fr;
+    }
 }
