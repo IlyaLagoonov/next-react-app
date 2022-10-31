@@ -11,6 +11,10 @@ import {withLayout} from "../layout/Layout";
 
   return (
       <>
+          <Heading tag={"h1"} children={"Привет, Андрей!"}/>
+
+          <Button appearance={'primary'} arrow={'right'} children={'кнопка'} />
+          <Button appearance={'ghost'} arrow={'right'} children={'кнопка2'} />
           <TextBlock TextSize={'small'}>
               текст сайс s
           </TextBlock>
@@ -28,11 +32,11 @@ import {withLayout} from "../layout/Layout";
           </Tag>
 
           <Tag size={'medium'} color='red'>
-              красный медиум
+              красный
           </Tag>
 
           <Tag size={'medium'} color='green'>
-              зеленый медиум
+              зеленый
           </Tag>
 
             <Rating rating={rating} isEditable={true} setRating={setRating} />
