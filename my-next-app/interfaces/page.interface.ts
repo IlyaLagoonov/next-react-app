@@ -32,8 +32,8 @@ export interface TopPageModel {
     tagsTitle:string;
     metaTitle:string;
     metaDescription:string;
-    firstCategory:number;
-    advantages:TopLevelCategory;
+    firstCategory:TopLevelCategory;
+    advantages:TopPageAdvantage[];
     createdAt:Date;
     updatedAt:Date;
     hh:HhDate;
