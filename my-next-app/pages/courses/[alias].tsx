@@ -1,8 +1,6 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { useEffect } from "react";
+
 import { withLayout } from "../../layout/Layout";
-import {GetStaticPaths, GetStaticPathsContext, GetStaticProps, GetStaticPropsContext} from "next";
+import {GetStaticPropsContext} from "next";
 import axios from "axios";
 import { MenuItem } from "../../interfaces/menu.interface";
 import { TopPageModel } from "../../interfaces/page.interface";
@@ -26,10 +24,8 @@ export async function getStaticPaths() {
     });
     return {
         paths: menu.flatMap(m => m.pages.map(p => '/courses/' + p.alias)),
-        fallback: true
+        fallback: false
     };
-
-    console.log(menu)
 }
 
 export async function getStaticProps({ params }:GetStaticPropsContext<ParsedUrlQuery> ) {
