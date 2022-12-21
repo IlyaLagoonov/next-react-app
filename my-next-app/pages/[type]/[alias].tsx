@@ -1,29 +1,30 @@
 import { withLayout } from "../../layout/Layout";
-import {GetStaticPropsContext, GetStaticPaths} from "next";
+import { GetStaticPropsContext, GetStaticPaths } from "next";
 import axios from "axios";
 import { MenuItem } from "../../interfaces/menu.interface";
-import {TopLevelCategory, TopPageModel} from "../../interfaces/page.interface";
+import { TopLevelCategory, TopPageModel } from "../../interfaces/page.interface";
 import { ParsedUrlQuery } from 'node:querystring';
 import { ProductModel } from "../../interfaces/product.interface";
-import {firstLevelMenu} from "../../helpers/helpers";
+import { firstLevelMenu } from "../../helpers/helpers";
+import { TopPageComponent } from "../../page-components";
 
 
-function Course({ menu, page, products }: CourseProps): JSX.Element {
-    return (
-        <>
-            {products.length}
-        </>
-    );
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+    return <TopPageComponent
+        firstCategory={firstCategory}
+        page={page}
+        products={products}
+    />;
 }
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 export async function getStaticPaths() {
     let paths: string[] = [];
-    for(const m of firstLevelMenu) {
+    for (const m of firstLevelMenu) {
         const { data: menu } = await axios.post<MenuItem[]>("https://courses-top.ru" + '/api/top-page/find', {
-            firstCategory:m.id
+            firstCategory: m.id
         });
-        paths = paths.concat(menu.flatMap(s=>s.pages.map(p=> `/${m.route}/${p.alias}`)));
+        paths = paths.concat(menu.flatMap(s => s.pages.map(p => `/${m.route}/${p.alias}`)));
     }
     return {
         paths,
@@ -31,56 +32,56 @@ export async function getStaticPaths() {
     };
 }
 
-export async function getStaticProps({ params }:GetStaticPropsContext<ParsedUrlQuery> ) {
+export async function getStaticProps({ params }: GetStaticPropsContext<ParsedUrlQuery>) {
     if (!params) {
         return {
-            notFound:true
+            notFound: true
         };
     }
 
-    const firstCategoryItem = firstLevelMenu.find(m=> m.route == params.type)
+    const firstCategoryItem = firstLevelMenu.find(m => m.route == params.type);
     if (!firstCategoryItem) {
         return {
-            notFound:true
+            notFound: true
         };
     }
 
     try {
 
         const { data: menu } = await axios.post<MenuItem[]>("https://courses-top.ru" + '/api/top-page/find', {
-            firstCategory:firstCategoryItem.id
+            firstCategory: firstCategoryItem.id
         });
-        if( menu.length == 0) {
+        if (menu.length == 0) {
             return {
-                notFound:true
+                notFound: true
             };
         }
         const { data: page } = await axios.get<TopPageModel>("https://courses-top.ru" + '/api/top-page/byAlias/' + params.alias);
         const { data: products } = await axios.post<ProductModel[]>("https://courses-top.ru" + '/api/product/find/', {
-            category:page.category,
+            category: page.category,
             limit: 10
         });
 
         return {
             props: {
                 menu,
-                firstCategory:firstCategoryItem.id,
+                firstCategory: firstCategoryItem.id,
                 page,
                 products
             }
         };
     } catch {
         return {
-            notFound:true
+            notFound: true
         };
     }
 
 }
 
 
-interface CourseProps extends Record<string, unknown> {
+interface TopPageProps extends Record<string, unknown> {
     menu: MenuItem[];
-    firstCategory:TopLevelCategory;
+    firstCategory: TopLevelCategory;
     page: TopPageModel;
     products: ProductModel[];
 }
