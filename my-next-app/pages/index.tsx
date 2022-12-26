@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Button, Heading, Rating, Tag } from "../components";
+import {Button, Heading, Input, Rating, Tag, TextArea} from "../components";
 import { TextBlock } from "../components/TextBlock/TextBlock";
 import { useState, useEffect } from "react";
 import { withLayout } from "../layout/Layout";
@@ -15,6 +15,9 @@ function Home({ menu, firstCategory }: HomeProps): JSX.Element {
     return (
         <>
             <Rating rating={rating} isEditable={true} setRating={setRating} />
+            <Input placeholder={'Имя'}/>
+            <Input placeholder={'Заголовок отзыва'}/>
+            <TextArea placeholder={'Текст отзыва'} />
         </>
     );
 }
