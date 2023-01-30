@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {useEffect, useState, KeyboardEvent} from "react";
 import StarIcon from './star.svg';
 
-export const Rating = ({isEditable, rating, setRating, ...props}:RatingProps):JSX.Element => {
+export const Rating = ({isEditable, rating, error,setRating, ...props}:RatingProps):JSX.Element => {
  const [ratingArray, setRatingArray] = useState<JSX.Element[]> (new Array(5).fill(<></>))
 
     useEffect(()=> {
@@ -55,8 +55,11 @@ export const Rating = ({isEditable, rating, setRating, ...props}:RatingProps):JS
     }
 
   return (
-      <div {...props}>
+      <div {...props} className={cn(styles.ratingWrapper,{
+          [styles.error]: error
+      })}>
           {ratingArray.map((r,i)=>(<span key={i}>{r}</span>))}
+          {error && <span className={styles.errorMessage}> {error.message } </span>}
       </div>
   )
 };

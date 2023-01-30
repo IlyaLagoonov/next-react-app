@@ -1,10 +1,11 @@
 
-import {GetStaticProps, GetStaticPaths, GetStaticPropsContext} from "next";
+import {GetStaticProps,GetStaticPropsContext} from "next";
 import axios from "axios";
 import { withLayout } from "../../layout/Layout";
 import {MenuItem} from "../../interfaces/menu.interface";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {ParsedUrlQuery} from "node:querystring";
+import {API} from "../../helpers/api";
 
 
 
@@ -38,7 +39,7 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({params}: GetSta
             notFound:true
         };
     }
-    const { data: menu } = await axios.post<MenuItem[]>("https://courses-top.ru" + '/api/top-page/find', {
+    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
         firstCategory:firstCategoryItem.id
     });
     return {

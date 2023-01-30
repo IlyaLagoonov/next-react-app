@@ -3,7 +3,7 @@ import styles from "./Search.module.css";
 import SearchIcon from '../../helpers/icons/searchIcon.svg'
 import cn from 'classnames';
 import {Input} from "../Input/Input";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Button} from "../Button/Button";
 import {useRouter} from "next/router";
 
@@ -20,7 +20,7 @@ export const Search = ({className, ...props}:SearchProps):JSX.Element => {
         })
     }
 
-    const handleKeyDown = (e:KeyboardEvent) => {
+    const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key == 'Enter') {
             goToSearch()
         };
@@ -34,7 +34,6 @@ export const Search = ({className, ...props}:SearchProps):JSX.Element => {
             value={search}
             onChange={(e)=>setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
-
         />
         <Button
             appearance='primary'
