@@ -6,14 +6,15 @@ import { MenuItem } from "../../interfaces/menu.interface";
 import { firstLevelMenu } from "../../helpers/helpers";
 import { ParsedUrlQuery } from "node:querystring";
 import { API } from "../../helpers/api";
+import { Heading } from "../../components";
 
 
 
-function Type({ firstCategory }: TypeProps): JSX.Element {
+function Type(): JSX.Element {
 
     return (
         <>
-            Type: {firstCategory}
+            <Heading tag="h3" children={'Скоро добавим новые категории!'} />
         </>
     );
 }
