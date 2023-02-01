@@ -1,13 +1,10 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import {Button, Heading, Input, Rating, Tag, TextArea} from "../components";
-import { TextBlock } from "../components/TextBlock/TextBlock";
-import { useState, useEffect } from "react";
+import { Input, Rating, TextArea } from "../components";
+import { useState } from "react";
 import { withLayout } from "../layout/Layout";
 import { GetStaticProps } from "next";
 import axios from "axios";
 import { MenuItem } from "../interfaces/menu.interface";
-import {API} from "../helpers/api";
+import { API } from "../helpers/api";
 
 
 function Home({ menu, firstCategory }: HomeProps): JSX.Element {
@@ -16,8 +13,8 @@ function Home({ menu, firstCategory }: HomeProps): JSX.Element {
     return (
         <>
             <Rating rating={rating} isEditable={true} setRating={setRating} />
-            <Input placeholder={'Имя'}/>
-            <Input placeholder={'Заголовок отзыва'}/>
+            <Input placeholder={'Имя'} />
+            <Input placeholder={'Заголовок отзыва'} />
             <TextArea placeholder={'Текст отзыва'} />
         </>
     );

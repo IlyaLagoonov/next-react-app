@@ -1,7 +1,7 @@
-import {HeadingProps} from "./Heading.props";
+import { HeadingProps } from "./Heading.props";
 import styles from "./Heading.module.css";
 
-export const Heading = ({tag, children, className }: HeadingProps):JSX.Element => {
+export const Heading = ({ tag, children, className }: HeadingProps): JSX.Element => {
     switch (tag) {
         case 'h1':
             return <h1 className={styles.h1}>{children}</h1>;
@@ -13,6 +13,6 @@ export const Heading = ({tag, children, className }: HeadingProps):JSX.Element =
             return <h4 className={styles.h4}>{children}</h4>;
 
         default:
-            return <></>
+            return <></>;
     }
 };
