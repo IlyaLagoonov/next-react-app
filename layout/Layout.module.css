@@ -62,6 +62,7 @@
   .wrapper {
     grid-template-columns: minmax(320px, 1fr);
     grid-template-areas:
+      "logo"
       "header"
       "body"
       "footer";
